@@ -1,0 +1,141 @@
+/* *{
+    border: 1px solid black;
+} */
+body{
+    background-image: url('/assets/images/tekno.jpg');
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+  }
+  .close-toggle{
+    align-self: flex-end;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 3px;
+    color: white;
+    width: fit-content;
+    display: none;
+
+}
+.close-toggle:hover{
+    color: black;
+    background-color: aliceblue;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items:center;
+    height: 100vh;
+    width: 100%;
+}
+
+
+.Login{
+    margin-top: 4px;
+}
+.forgot-password a{
+    color: white;
+}
+.signup-message a {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+.bulat {
+
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: auto;
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+}
+.bulat img {
+    display: block;
+    margin:auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+} 
+.Asean{
+    position: absolute;
+    width: 80%;
+}
+h1,h2{
+    color:yellow
+}
+.container label[for="username"] {
+    font-weight: bold;
+    font-size:large;
+  }
+.container label[for="password"] {
+    font-weight: bold;
+    font-size:large;
+  }
+  .Asean{
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+.signup-message{
+    margin-top: 5px;
+    color: white;
+}
+.forgot-password{
+margin-top: 0px;
+}
+.forgot-password a{
+    color:white;
+    font-weight: bold;
+    font-size: small;
+    float: right;
+}
+form {
+    margin-right: 50px;
+    background-color: rgba(249, 2, 2, 0.7);    
+    border-radius: 10px;
+    padding: 0px 20px 10px 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    height:550px;
+    width:320px;
+    border: 1px solid #FFE4B5;
+    color:yellow;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+button:hover {
+    background-color: #45a049;
+}
+
+
+
+@media screen and (max-width:700px){
+    .container{
+        justify-content: center;
+    }
+    form{
+        margin-right: 0px;
+        width: 300px;
+        height: 530px;
+    }
+}
+
+

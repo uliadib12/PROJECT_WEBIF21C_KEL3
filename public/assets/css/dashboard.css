@@ -1,0 +1,163 @@
+/* *{
+    border:1px solid black} */
+
+.container{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+.container-content{
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.content{
+    flex-grow: 1;
+}
+.navtop span{
+    font-weight: bold;
+}
+.navbar{
+    height: 100vh;
+    width: 175px;
+    background-color:#2E99A5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+}
+.close-toggle{
+    align-self: flex-end;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 3px;
+    color: white;
+    width: fit-content;
+    display: none;
+
+}
+.close-toggle:hover{
+    color: black;
+    background-color: aliceblue;
+}
+.navtop{
+    display: flex;
+    flex-direction: row;
+    padding: 7px;
+    align-items: center;
+    background-color: aliceblue;
+}
+.navtop .toggle:hover{
+    background-color:#2E99A5;
+    border-radius: 10px;
+    
+}
+
+body{
+    padding: 0;
+    margin: 0;
+   
+}
+
+.navtop span{
+    flex-grow: 1;
+}
+.bi-gear-fill{
+    margin-left: 10px;
+}
+
+form {
+}
+
+.search {
+    width: 90px;
+    height: 20px; 
+    border-radius: 15px;
+    align-items: left;
+}
+
+.chat, .toggle {
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
+.items{
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.nav-item{
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    padding: 10px;
+    background-color:#D9D9D9;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+.nav-item span{
+    margin-left: 10px;
+    flex-grow: 1;
+}
+
+.avatar-navbar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+    margin-top:30px;
+    margin-bottom: 20px;
+}
+
+.avatar-navbar img {
+    display: block;
+    margin:auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+
+/* ini bagian konten dashboard */
+.content{
+display: flex;
+flex-grow: 1;
+align-items: center;
+justify-content: center;
+margin-top: 20px;
+overflow: hidden;
+
+  }
+  
+  
+
+  
+
+
+
+
+@media screen and (max-width:800px){
+    .navbar{
+        width: 0px;
+        padding: 0px;
+        z-index: 5;
+    }
+    .avatar{
+        display: none;
+    }
+    .Items{
+        display: none;
+    }
+    
+
+  }
