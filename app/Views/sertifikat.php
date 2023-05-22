@@ -33,7 +33,7 @@
           <div class="toggle" onclick="Side()">
             <i class="bi bi-list"></i>
           </div>
-          <span>Data Mitra</span>
+          <span>Sertifikat</span>
           <form> 
           </form>
           <div class="chat">

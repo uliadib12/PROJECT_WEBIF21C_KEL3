@@ -44,7 +44,11 @@ $routes->get('/inner-page', 'Home::innerpage');
 
 
 
-$routes->get('/tambahdata', 'Home::tambahData');
+$routes->post('/tambah-data', 'Home::tambahData');
+$routes->post('/edit-data', 'Home::editData');
+$routes->post('/hapus-data', 'Home::hapusData');
+
+
 
 
 

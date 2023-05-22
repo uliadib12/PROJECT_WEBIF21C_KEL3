@@ -14,7 +14,9 @@ class Home extends BaseController
 
     public function dashboard()
     {
-        return view('dashboard');
+        $model = new ModelPenjadwalan();
+        $data['penjadwalan'] = $model->getPenjadwalan();
+        return view('dashboard',$data);
     }
 
     public function penjadwalan()
@@ -24,6 +26,7 @@ class Home extends BaseController
 
         return view('penjadwalan', $data);
     }
+    
     public function laporan()
     {
         return view('laporan');
@@ -105,44 +108,99 @@ class Home extends BaseController
             $model->insert($data);
     
             // Redirect atau lakukan operasi lain setelah penyimpanan berhasil
-            return redirect()->to('/penjadwalan');
+            // return redirect()->to('/penjadwalan');
         } else {
             // Jika file gambar tidak valid
             return redirect()->back()->withInput()->with('error', 'Gambar tidak valid');
         }
     }
 
+    public function updateData()
+{
+    $data = $this->request->getPost(); // Mendapatkan semua data dari AJAX
 
-    // public function tambahData()
-    // {
-    //     $model = new ModelPenjadwalan();
+    // Dapatkan nomor (No) dari data
+    $no = $data['no'];
 
-    //     // Mengambil data dari form
-    //     $gambar = $this->request->getFile('gambar');
-    //     $namaEvent = $this->request->getPost('nama_event');
-    //     $tanggal = $this->request->getPost('tanggal');
-    //     $jam = $this->request->getPost('jam');
-    //     $tempat = $this->request->getPost('tempat');
-        
-    //     $data = [
-    //         'gambar' => $gambar,
-    //         'Nama_Event' => $namaEvent,
-    //         'Tanggal' => $tanggal,
-    //         'Jam' => $jam,
-    //         'Tempat' => $tempat
-    //     ];
-    //     // Memeriksa apakah file gambar diunggah
-    //     echo "<pre>";
-    // echo "Nilai dari \$data:";
-    // print_r($data);
-    // echo "</pre>";
-    //     $model->insert($data);
+    // Query dan dapatkan data yang sesuai dengan nomor (No) dari database
+    $model = new ModelPenjadwalan();
+    $existingData = $model->where('No', $no)->first();
 
-    //     return redirect()->to('penjadwalan');
+    if ($existingData) {
+        // Update nilai-nilai yang diubah dari data ke existingData
+        $existingData['Nama_Event'] = $data['nama_event'];
+        $existingData['Tanggal'] = $data['tanggal'];
+        $existingData['Jam'] = $data['jam'];
+        $existingData['Tempat'] = $data['tempat'];
 
-    // }
+        // Periksa apakah ada file gambar yang diunggah
+        $gambar = $this->request->getFile('gambar');
+        if ($gambar && $gambar->isValid()) {
+            $newName = $gambar->getRandomName();
+            $gambar->move(ROOTPATH . 'public/uploads', $newName);
 
+            // Simpan nama file yang baru ke dalam kolom gambar di tabel database
+            $existingData['gambar'] = $newName;
+        }
 
-    
+        // Simpan perubahan ke database
+        $model->update($no, $existingData, 'No');
+
+        // Response JSON sukses
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Data berhasil diupdate',
+        ]);
+    } else {
+        // Response JSON error jika data dengan nomor (No) yang diberikan tidak ditemukan
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Data tidak ditemukan',
+        ]);
+    }
+}
+
+public function hapusData()
+{
+    $no = $this->request->getPost('no');
+    echo($no);
+    // Query dan dapatkan data yang sesuai dengan nomor (No) dari database
+    $model = new ModelPenjadwalan();
+    $existingData = $model->where('No', $no)->first();
+
+    if ($existingData) {
+        // Hapus data dari database
+        $model->delete($no);
+
+        // Response JSON sukses
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus',
+        ]);
+    } else {
+        // Response JSON error jika data dengan nomor (No) yang diberikan tidak ditemukan
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Data tidak ditemukan',
+        ]);
+    }
+}
+
+public function search()
+{
+    $request = service('request');
+    $keyword = $request->getPost('keyword');
+
+    $model = new ModelPenjadwalan();
+    $data['penjadwalan'] = $model->like('No', $keyword)
+        ->orLike('Nama_Event', $keyword)
+        ->orLike('Tanggal', $keyword)
+        ->orLike('Jam', $keyword)
+        ->orLike('Tempat', $keyword)
+        ->findAll();
+
+    return $this->response->setJSON($data['penjadwalan']);
+}
+
 
 }

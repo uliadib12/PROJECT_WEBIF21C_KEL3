@@ -267,6 +267,8 @@ function closePopup() {
 
 function openPopup() {
   popupLogin.style.display = "block";
+  document.getElementById('navbar').classList.remove("navbar-mobile")
+  document.getElementsByClassName('mobile-nav-toggle')[0].classList.replace('bi-x', 'bi-list');
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -274,4 +276,31 @@ popupLogin.onclick = function(event) {
   if (event.target == popupLogin) {
     popupLogin.style.display = "none";
   }
+}
+
+
+function sigin(){
+  document.getElementsByClassName("login-nav")[0].style.marginBottom= "3em";
+  document.getElementsByClassName("login__label")[0].style.display= "none";
+  document.getElementsByClassName("login__input")[0].style.display= "none";
+  document.getElementsByClassName("login__submit")[0].innerHTML = "SIGN IN";
+  document.getElementsByClassName("login__forgot")[0].style.display = "block";
+
+  let formItem = document.getElementsByClassName("login-nav__item");
+  for(var i = 0; i<formItem.length;i++){
+    formItem[i].classList.remove("active");
+  }
+  formItem[0].classList.add("active");
+}
+function signup(){
+  document.getElementsByClassName("login-nav")[0].style.marginBottom= "1.5em";
+  document.getElementsByClassName("login__label")[0].style.display= "block";
+  document.getElementsByClassName("login__input")[0].style.display= "block";
+  document.getElementsByClassName("login__submit")[0].innerHTML = "SIGN UP";
+  document.getElementsByClassName("login__forgot")[0].style.display = "none";
+  let formItem = document.getElementsByClassName("login-nav__item");
+  for(var i = 0; i<formItem.length;i++){
+    formItem[i].classList.remove("active");
+  }
+  formItem[1].classList.add("active");
 }

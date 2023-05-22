@@ -58,8 +58,12 @@ table {
     width: 100%;
     border: none;
   }
-
-
+.pilih-data td i{
+  margin-right: 10px;
+}
+.pilih-data td i:hover{
+  cursor: pointer;
+}
 
 
 
@@ -79,4 +83,118 @@ table {
     }
 
   }
+ 
+  body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  border-radius: 5px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.Tambah_Data{
+  background-color:green;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color:white;
+  cursor: pointer;
+  border: solid 2px green ;
   
+}
+.Edit_Data{
+  background-color:blue;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color:white;
+  cursor: pointer;
+  border: solid 2px blue;
+
+
+}
+
+.kolompopup{
+  border: none;
+}
+               
+.popupbawah:nth-child(even){
+  background-color: white;
+}
+.hapusboder{
+  border: none;
+}
+
+.confirmation-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:rgb(232, 232, 219);
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+
+.confirmation-popup .konfirmasiYes {
+  width: 40px;
+  border: none;
+  margin-top: 50px;
+  float: left;
+  margin-left: 30px;
+  background-color:#008000;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+
+}
+.confirmation-popup .konfirmasiNo {
+  width: 40px;
+  float: right;
+  margin-top: 50px;
+  margin-right: 30px;
+  background-color:#FF0000;
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+
+
+ }
+

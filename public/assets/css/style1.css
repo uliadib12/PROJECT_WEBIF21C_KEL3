@@ -6,6 +6,8 @@ body{
     background-size: cover;
     padding: 0;
     margin: 0;
+    font-family: "Open Sans", sans-serif;
+
   }
   .close-toggle{
     align-self: flex-end;
@@ -115,7 +117,7 @@ button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin-top: 10px;
+    margin-top: 30px;
     border: none;
     border-radius: 4px;
     cursor: pointer;

@@ -17,18 +17,20 @@ function Side(){
         
     
     }else if(navbar.style.width=="0px" && window.innerWidth >= 750){
+        /*pas mau besarin navbar*/
         navbar.style.width="175px";
+        navbar.style.minWidth="175px";
         avatar.style.display="block";
         items.style.display="block";
         navbar.style.padding="20px";
     }
-    else{
+    else{   /*pas mau ngecilin navbar*/
         navbar.style.width="0px";
+        navbar.style.minWidth="0px";
         avatar.style.display="none";
         items.style.display="none";
         navbar.style.padding="0px";
         toggleX.style.display= "none";
-
 
     }
 
@@ -56,6 +58,7 @@ window.addEventListener('resize', function() {
         const toggleX = document.getElementsByClassName('close-toggle')[0];
 
         navbar.style.width="0px";
+        navbar.style.minWidth="0px";
         navbar.style.position = "relative";
         avatar.style.display="none";
         items.style.display="none";
@@ -88,10 +91,45 @@ navItems.forEach((item, index) => {
 
 
 
-// operasi table
+window.onscroll = function() {scrollFunction()};
 
-function TambahData(){
-    var formInput = document.getElementsByClassName("form-isi-data")[0];
-    formInput.submit();
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("scrollBtn").style.display = "block";
+  } else {
+    document.getElementById("scrollBtn").style.display = "none";
+  }
 }
+
+// Fungsi untuk scroll ke atas saat tombol diklik
+function topFunction() {
+  document.body.scrollTop = 0; // Untuk Safari
+  document.documentElement.scrollTop = 0; // Untuk Chrome, Firefox, IE, dan Opera
+}
+
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+          ['2004/05',  165,      938,         522,             998,           450,      614.6],
+          ['2005/06',  135,      1120,        599,             1268,          288,      682],
+          ['2006/07',  157,      1167,        587,             807,           397,      623],
+          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+        ]);
+
+        var options = {
+          title : 'Monthly Coffee Production by Country',
+          vAxis: {title: 'Cups'},
+          hAxis: {title: 'Month'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
 
