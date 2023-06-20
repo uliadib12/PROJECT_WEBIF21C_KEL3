@@ -26,10 +26,10 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'db_webif21ckel3',
+        'hostname' => 'ci4database.mysql.database.azure.com',
+        'username' => 'ferli',
+        'password' => 'orangganteng',
+        'database' => 'ci4_ferli',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

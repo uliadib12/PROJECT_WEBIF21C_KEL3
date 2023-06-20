@@ -1,3 +1,6 @@
+*{
+  /* border: 1px solid black; */
+}
 .close-toggle{
     align-self: flex-end;
     font-size: 17px;
@@ -109,8 +112,14 @@ table {
   border: 1px solid #888;
   width: 60%;
   border-radius: 5px;
+  text-align: center;
 }
-
+.modal-content form{
+  border: 1px solid black;
+}
+.modal-content thead{
+  margin: 20px;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;

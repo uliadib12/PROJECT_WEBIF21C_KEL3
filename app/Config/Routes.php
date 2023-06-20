@@ -29,15 +29,19 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::duser');
+$routes->get('/loginAdmin', 'Home::index');
+
 $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/login', 'Home::login');
+$routes->get('/signup', 'Home::signUp');
 $routes->get('/penjadwalan', 'Home::penjadwalan');
 $routes->get('/laporan', 'Home::laporan');
 $routes->get('/pengingat', 'Home::pengingat');
 $routes->get('/data_mitra', 'Home::data_mitra');
 $routes->get('/sertifikat', 'Home::sertifikat');
-$routes->get('/dashboard-user', 'Home::duser');
+$routes->get('/dashboardUser', 'Home::duser');
+$routes->get('/profile', 'Home::profile');
 $routes->get('/portfolio-details', 'Home::portfolio');
 $routes->get('/inner-page', 'Home::innerpage');
 
@@ -47,6 +51,11 @@ $routes->get('/inner-page', 'Home::innerpage');
 $routes->post('/tambah-data', 'Home::tambahData');
 $routes->post('/edit-data', 'Home::editData');
 $routes->post('/hapus-data', 'Home::hapusData');
+
+
+
+
+$routes->get('/print', 'PrintSertifikat::index');
 
 
 

@@ -8,7 +8,6 @@
         <div class="nav-item"id="Dashboard_link"><i class="bi bi-speedometer2"></i><span>Dashboard</span></div>
         <div class="nav-item"id="Penjadwalan_link"><i class="bi bi-calendar-check"></i><span>Penjadwalan</span></div>
         <div class="nav-item"id="Laporan_link"><i class="bi bi-journal-bookmark"></i><span>Laporan</span></div>
-        <div class="nav-item"id="Pengingat_link"><i class="bi bi-alarm"></i><span>Pengingat</span></div>
         <div class="nav-item"id="Data_Mitra_link"><i class="bi bi-people-fill"></i><span>Data Mitra</span></div>
         <div class="nav-item"id="Sertifikat_link"><i class="bi bi-award"></i><span>Sertifikat</span></div>
 

@@ -28,7 +28,7 @@ body {
 
 .navbar {
     
-    height: 180vh;
+    height: 150vh;
     width: 175px;
     min-width: 175px;
     background-color: #2E99A5;
@@ -49,6 +49,20 @@ body {
     display: none;
 
 }
+.chat .login_user {
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+    width: 90px;
+    height: 30px;
+    background-color: #2E99A5;
+    color: white;
+    cursor: pointer;
+  }
+  .chat .login_user:hover{
+    color: black;
+    background-color: aqua;
+  }
 
 .close-toggle:hover {
     color: black;
@@ -78,6 +92,51 @@ body {
 .bi-gear-fill {
     margin-left: 10px;
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    white-space: nowrap;
+    background-color: #f9f9f9;
+    min-width: 165px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0; /* Menentukan posisi muncul ke samping kiri */
+    top: 100%; /* Menentukan posisi muncul di bawah */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+  
+  .dropdown-content a {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: small;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover{
+    font-weight: bold;
+    color:white;
+    background-color: #2E99A5;
+  }
+  .dropdown-content a i{
+    margin-right: 8px;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content.show {
+    opacity: 1;
+  }
+  
 
 form {}
 
@@ -151,7 +210,7 @@ form {}
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     overflow: hidden;
 
 }
@@ -207,6 +266,7 @@ form {}
 .card-event .gambar-event {
     border-radius: 10px;
     width: 150px;
+    margin-right: 10px;
 }
 
 .card-event .deskripsi-event {

@@ -4,17 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelLogin extends Model
+class ModelSignup extends Model
 {
-    protected $table      = 'tb_login';
+    protected $table      = 'login_user';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['username','email', 'password'];
+    protected $allowedFields = ['username', 'email', 'password'];
 
     public function getUser(){
         return $this->findAll();
     }
-
-
 }
-

@@ -5,7 +5,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -110,7 +110,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -119,7 +119,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -129,7 +129,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -151,6 +151,10 @@
     if (window.location.hash) {
       if (select(window.location.hash)) {
         scrollto(window.location.hash)
+      }
+
+      if (sessionStorage.getItem('ShowLogin') === 'none') {
+
       }
     }
   });
@@ -180,7 +184,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -201,9 +205,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -211,7 +215,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -258,6 +262,7 @@
 })()
 
 
+
 var popupLogin = document.getElementById("popupLogin");
 
 
@@ -265,42 +270,175 @@ function closePopup() {
   popupLogin.style.display = "none";
 }
 
-function openPopup() {
+function openPopup(event) {
+  event.preventDefault();
   popupLogin.style.display = "block";
   document.getElementById('navbar').classList.remove("navbar-mobile")
   document.getElementsByClassName('mobile-nav-toggle')[0].classList.replace('bi-x', 'bi-list');
 }
 
 // When the user clicks anywhere outside of the modal, close it
-popupLogin.onclick = function(event) {
+popupLogin.onclick = function (event) {
   if (event.target == popupLogin) {
     popupLogin.style.display = "none";
   }
 }
 
+var formLogin = document.getElementById("form-login");
 
-function sigin(){
-  document.getElementsByClassName("login-nav")[0].style.marginBottom= "3em";
-  document.getElementsByClassName("login__label")[0].style.display= "none";
-  document.getElementsByClassName("login__input")[0].style.display= "none";
-  document.getElementsByClassName("login__submit")[0].innerHTML = "SIGN IN";
+function LoginUser(event) {
+  event.preventDefault();
+  var formData = new FormData(formLogin);
+  $.ajax({
+    type: 'POST',
+    url: "Home/login_user",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      if (response.success) {
+        // Respon sukses dari server
+        // Redirect ke halaman dashboard atau lakukan tindakan lain
+        sessionStorage.setItem('ShowLogin', 'hilangkan');
+        window.location.href = 'dashboardUser';
+      } else {
+        // Respon error dari server
+        // Menampilkan pesan error
+        document.getElementsByClassName("info-error")[0].innerHTML = "Login gagal. Username atau pasword salah";
+      }
+    },
+    error: function (xhr, status, error) {
+
+    }
+  });
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var showLogin = sessionStorage.getItem('ShowLogin');
+  if (showLogin === 'hilangkan') {
+    var getStarted = document.getElementsByClassName('getstarted')[0];
+    document.getElementById('logoutkanan').style.display = 'block';
+    getStarted.style.display = 'none';
+  }
+});
+
+function siginSwitch() {
+  document.getElementsByClassName("login-nav")[0].style.marginBottom = "3em";
+  document.getElementsByClassName("login__label")[0].style.display = "none";
+  document.getElementsByClassName("login__input")[0].style.display = "none";
+  document.getElementById("SigninButton").style.display = "block";
+  document.getElementById("SignupButton").style.display = "none";
+
   document.getElementsByClassName("login__forgot")[0].style.display = "block";
 
   let formItem = document.getElementsByClassName("login-nav__item");
-  for(var i = 0; i<formItem.length;i++){
+  for (var i = 0; i < formItem.length; i++) {
     formItem[i].classList.remove("active");
   }
   formItem[0].classList.add("active");
 }
-function signup(){
-  document.getElementsByClassName("login-nav")[0].style.marginBottom= "1.5em";
-  document.getElementsByClassName("login__label")[0].style.display= "block";
-  document.getElementsByClassName("login__input")[0].style.display= "block";
-  document.getElementsByClassName("login__submit")[0].innerHTML = "SIGN UP";
+
+function signupSwitch() {
+  document.getElementsByClassName("login-nav")[0].style.marginBottom = "1.5em";
+  document.getElementsByClassName("login__label")[0].style.display = "block";
+  document.getElementsByClassName("login__input")[0].style.display = "block";
+  document.getElementById("SigninButton").style.display = "none";
+  document.getElementById("SignupButton").style.display = "block";
   document.getElementsByClassName("login__forgot")[0].style.display = "none";
   let formItem = document.getElementsByClassName("login-nav__item");
-  for(var i = 0; i<formItem.length;i++){
+  for (var i = 0; i < formItem.length; i++) {
     formItem[i].classList.remove("active");
   }
   formItem[1].classList.add("active");
+  var loginSubmit = document.getElementsByClassName("login__submit")[0];
+  loginSubmit.removeEventListener("click", LoginUser); // Menghapus event listener sebelumnya
+  loginSubmit.addEventListener("click", function (event) {
+    event.preventDefault();
+  });
 }
+
+function registerUser(event) {
+  event.preventDefault();
+
+  var username = document.getElementById("login-input-username").value;
+  var email = document.getElementById("login-input-email").value;
+  var password = document.getElementById("login-input-password").value;
+
+  // Kirim permintaan Ajax ke endpoint signUp di controller
+  $.ajax({
+    type: "POST",
+    url: "Home/signUp",
+    data: {
+      username: username,
+      email: email,
+      password: password
+    },
+    success: function (response) {
+      siginSwitch();
+    },
+    error: function (xhr, status, error) {
+      // Penanganan kesalahan
+      console.log(xhr.responseText);
+    }
+  });
+}
+
+
+
+
+function showDetails(element) {
+  var h4Element = element.parentNode.parentNode.querySelector("h4");
+  var eventName = h4Element.innerText;
+
+  $.ajax({
+    url: 'Home/showDetails',
+    method: 'POST',
+    data: { eventName: eventName },
+    success: function (response) {
+      window.location.href = "portfolio-details"
+    },
+    error: function (xhr, status, error) {
+      // Penanganan kesalahan
+      console.log(xhr.responseText);
+    }
+  });
+}
+
+
+function scrollToGetStarted() {
+  sessionStorage.setItem("ShowLogin", "");
+  window.location.href = "dashboardUser";
+}
+
+
+
+
+
+
+// // Fungsi untuk mengubah tombol login menjadi tombol logout
+// function showLogoutButton() {
+//   var loginButton = document.querySelector('.getstarted');
+//   var logoutButton = document.querySelector('#logoutkanan');
+
+//   loginButton.style.display = 'none';
+//   logoutButton.style.display = 'block';
+// }
+
+// // Fungsi untuk mengubah tombol logout menjadi tombol login
+// function showLoginButton() {
+//   var loginButton = document.querySelector('.getstarted');
+//   var logoutButton = document.querySelector('#logoutkanan');
+
+//   loginButton.style.display = 'block';
+//   logoutButton.style.display = 'none';
+// }
+
+// // Contoh penggunaan fungsi di dalam logika login/logout
+// // Ketika user berhasil login
+// showLogoutButton();
+
+// // Ketika user berhasil logout
+// showLoginButton();

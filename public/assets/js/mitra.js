@@ -39,9 +39,9 @@ $(document).ready(function () {
     $('.Tambah_Data').click(function (event) {
         event.preventDefault();
         var form = $('form.form-input-data');
-        var url = form.attr('action') + 'tambahData';
+        var url = form.attr('action') + 'tambahMitra';
         var formData = new FormData(form[0]);
-
+        
         $.ajax({
             type: 'POST',
             url: url,
@@ -60,7 +60,7 @@ $(document).ready(function () {
     $('.Edit_Data').click(function (event) {
         event.preventDefault();
         var form = $('form.form-input-data');
-        var url = form.attr('action') + 'updateData';
+        var url = form.attr('action') + 'updateMitra';
         var formData = new FormData(form[0]);
 
         formData.append('no', no_urut);
@@ -97,7 +97,7 @@ function HapusData() {
 
     $.ajax({
         type: 'POST',
-        url: '/Home/hapusData',
+        url: '/Home/hapusMitra',
         data: data,
         dataType: 'json',
         success: function (response) {
@@ -119,5 +119,3 @@ function ConfirmDeletion() {
     CloseConfirmation();
     // Panggil fungsi atau lakukan aksi yang diperlukan untuk menghapus data
 }
-
-

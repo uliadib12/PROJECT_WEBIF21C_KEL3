@@ -14,8 +14,10 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,16 +27,9 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Arsha
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>
@@ -53,50 +48,63 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#team">Event</a></li>
           <li><a class="nav-link   scrollto" href="#portfolio">Dokumentasi</a></li>
-          <li><a class="nav-link scrollto" href="#services">Team</a></li>
+          <li><a class="nav-link scrollto" href="#services">Mitra</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#" onclick="openPopup()">Login</a></li>
+          <li><a class="getstarted scrollto" onclick="openPopup(event)">Login</a></li>
+          <li><a class="getstarted scrollto" href="loginAdmin" onclick="">Login Admin</a></li>
+
+          <li>
+            <a class="getstarted scrollto " id="logoutkanan" href="#" onclick="scrollToGetStarted()">
+              <i class="bi bi-box-arrow-right" id="logut"></i>
+            </a>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
 
-        <div id="popupLogin" class="popupLogin">
+      <div id="popupLogin" class="popupLogin">
         <div class="login-container">
-              <form action="" class="form-login">
-                <ul class="login-nav">
-                  <li class="login-nav__item active" onclick="sigin()">
-                    <a href="#">Sign In</a>
-                  </li>
-                  <li class="login-nav__item" onclick="signup()">
-                    <a href="#">Sign Up</a>
-                  </li>
-                </ul>
-                <label for="login-input-user" class="login__label" style="display:none">
-                  Nama
-                </label>
-                <input id="login-input-nama" class="login__input" type="text" style="display:none" />
-                <label for="login-input-password" class="login__label">
-                  Username
-                </label>
-                <input id="login-input-user" class="login__input" type="text" />
-                <label for="login-input-password" class="login__label">
-                  Password
-                </label>
-                <input id="login-input-password" class="login__input" type="password" />
-                <label for="login-sign-up" class="login__label--checkbox">
-                  <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
-                  Keep me Signed in
-                </label>
-                <button class="login__submit" disabled>Sign in</button>
-              </form>
-              <a href="#" class="login__forgot">Forgot Password?</a>
-            </div>
-            
-            
-          </div>
+          <form action="" class="form-login" id="form-login" method="POST">
+            <ul class="login-nav">
+              <li class="login-nav__item active" onclick="siginSwitch()">
+                <a>Sign In</a>
+              </li>
+              <li class="login-nav__item" id="signup" onclick="signupSwitch()">
+                <a>Sign Up</a>
+              </li>
+            </ul>
+            <label for="login-input-email" class="login__label" style="display:none">
+              Email
+            </label>
+            <input id="login-input-email" class="login__input" type="text" style="display:none" />
+            <label for="login-input-username" class="login__label">
+              Username
+            </label>
+            <input id="login-input-username" class="login__input" type="text" name="username" />
+            <label for="login-input-password" class="login__label">
+              Password
+            </label>
+            <input id="login-input-password" class="login__input" type="password" name="password" />
 
+            <span class="info-error" style="color:white;font-size: 13px"></span><br>
+            <label for="login-sign-up" class="login__label--checkbox">
+              <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
+              Keep me Signed in
+            </label>
+
+            <button id="SigninButton" class="login__submit" onclick="LoginUser(event)">Sign in</button>
+            <button id="SignupButton" class="signup__submit" onclick="registerUser(event)" style="display:none">Sign
+              up</button>
+
+          </form>
+          <a href="" class="login__forgot">Forgot Password?</a>
         </div>
+
+
+      </div>
+
+    </div>
 
     </div>
   </header><!-- End Header -->
@@ -106,12 +114,14 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+          data-aos="fade-up" data-aos-delay="200">
           <h1>Universitas Teknokrat Indonesia</h1>
           <h2>The campus event web contains event information at the Indonesian Technocratic University</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started scrollto">About US</a>
-            <a href="https://youtu.be/buBHH4yyQHo" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a href="https://youtu.be/buBHH4yyQHo" class="glightbox btn-watch-video"><i
+                class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -170,8 +180,12 @@
         <div class="row content">
           <div class="col-lg-6">
             <p>
-             Event kampus adalah kegiatan atau acara yang diadakan di lingkungan kampus atau oleh mahasiswa dan lembaga kampus untuk tujuan tertentu. Event kampus dapat mencakup berbagai jenis kegiatan, seperti seminar, konferensi, workshop, pertunjukan seni, festival budaya, kompetisi olahraga, pameran, dan masih banyak lagi.
-             Tujuan dari event kampus dapat bervariasi, tergantung pada jenis acara yang diadakan dan inisiatif yang mendasarinya. Beberapa tujuan umum dari event kampus meliputi:
+              Event kampus adalah kegiatan atau acara yang diadakan di lingkungan kampus atau oleh mahasiswa dan lembaga
+              kampus untuk tujuan tertentu. Event kampus dapat mencakup berbagai jenis kegiatan, seperti seminar,
+              konferensi, workshop, pertunjukan seni, festival budaya, kompetisi olahraga, pameran, dan masih banyak
+              lagi.
+              Tujuan dari event kampus dapat bervariasi, tergantung pada jenis acara yang diadakan dan inisiatif yang
+              mendasarinya. Beberapa tujuan umum dari event kampus meliputi:
             </p>
             <ul>
               <li><i class="ri-check-double-line"></i>Meningkatkan pengalaman dan keterampilan mahasiswa</li>
@@ -181,9 +195,11 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              Event kampus juga dapat menjadi platform untuk mempromosikan prestasi akademik, riset, dan inovasi yang
+              dilakukan oleh mahasiswa dan fakultas. Selain itu, event kampus juga dapat menjadi sarana untuk
+              menghadirkan pembicara tamu, praktisi industri, atau tokoh terkenal yang dapat memberikan wawasan dan
+              inspirasi kepada mahasiswa.
+
             </p>
             <a href="#" class="btn-learn-more">Learn More</a>
           </div>
@@ -203,43 +219,61 @@
             <div class="content">
               <h3>Event kampus Sangat Berguna Dan <strong>Bermanfaat bagi para Mahasiswa</strong></h3>
               <p>
-              Event kampus memiliki potensi untuk memberikan manfaat yang luas bagi mahasiswa dan komunitas kampus. Dengan berpartisipasi aktif dalam event kampus, mahasiswa dapat mengembangkan keterampilan, memperluas jaringan, dan mendapatkan pengal
+                Event kampus memiliki potensi untuk memberikan manfaat yang luas bagi mahasiswa dan komunitas kampus.
+                Dengan berpartisipasi aktif dalam event kampus, mahasiswa dapat mengembangkan keterampilan, memperluas
+                jaringan, dan mendapatkan pengal
               </p>
             </div>
 
             <div class="accordion-list">
               <ul>
                 <li>
-                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span>Meningkatkan keterlibatan mahasiswa<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" class="collapse"
+                    data-bs-target="#accordion-list-1"><span>01</span>Meningkatkan keterlibatan mahasiswa<i
+                      class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                     <p>
-                    Event kampus memberikan kesempatan bagi mahasiswa untuk terlibat dalam kegiatan di luar kelas. Ini membantu meningkatkan keterlibatan dan keterikatan mereka dengan lingkungan kampus dan komunitasnya.
+                      Event kampus memberikan kesempatan bagi mahasiswa untuk terlibat dalam kegiatan di luar kelas. Ini
+                      membantu meningkatkan keterlibatan dan keterikatan mereka dengan lingkungan kampus dan
+                      komunitasnya.
                     </p>
                   </div>
                 </li>
 
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span>Pengembangan kepemimpinan <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2"
+                    class="collapsed"><span>02</span>Pengembangan kepemimpinan <i
+                      class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                    Event kampus sering memerlukan tim yang terorganisir dengan peran dan tanggung jawab yang jelas. Ini memberikan kesempatan bagi mahasiswa untuk mengembangkan keterampilan kepemimpinan mereka, seperti mengatur tugas, mengambil keputusan, dan menginspirasi anggota tim.
+                      Event kampus sering memerlukan tim yang terorganisir dengan peran dan tanggung jawab yang jelas.
+                      Ini memberikan kesempatan bagi mahasiswa untuk mengembangkan keterampilan kepemimpinan mereka,
+                      seperti mengatur tugas, mengambil keputusan, dan menginspirasi anggota tim.
                     </p>
                   </div>
                 </li>
 
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Jaringan dan hubungan sosial <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span>
+                    Jaringan dan hubungan sosial <i class="bx bx-chevron-down icon-show"></i><i
+                      class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                    Event kampus merupakan tempat yang baik untuk memperluas jaringan sosial dan membangun hubungan dengan sesama mahasiswa, fakultas, staf, dan pemangku kepentingan kampus lainnya. Ini dapat membantu dalam menciptakan persahabatan, kolaborasi akademik, dan peluang karir di masa depan.
+                      Event kampus merupakan tempat yang baik untuk memperluas jaringan sosial dan membangun hubungan
+                      dengan sesama mahasiswa, fakultas, staf, dan pemangku kepentingan kampus lainnya. Ini dapat
+                      membantu dalam menciptakan persahabatan, kolaborasi akademik, dan peluang karir di masa depan.
                     </p>
                   </div>
                 </li>
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>04</span> Pengenalan budaya dan minat khusus <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>04</span>
+                    Pengenalan budaya dan minat khusus <i class="bx bx-chevron-down icon-show"></i><i
+                      class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                    Event kampus sering kali mencakup kegiatan yang beragam, seperti festival budaya, pameran seni, konser musik, seminar, dan konferensi. Ini memberikan kesempatan bagi mahasiswa untuk mengenal dan menghargai budaya, seni, dan minat khusus lainnya di antara komunitas kampus.
+                      Event kampus sering kali mencakup kegiatan yang beragam, seperti festival budaya, pameran seni,
+                      konser musik, seminar, dan konferensi. Ini memberikan kesempatan bagi mahasiswa untuk mengenal dan
+                      menghargai budaya, seni, dan minat khusus lainnya di antara komunitas kampus.
                     </p>
                   </div>
                 </li>
@@ -248,113 +282,60 @@
 
           </div>
 
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("assets/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
+            style='background-image: url("assets/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
         </div>
 
       </div>
     </section><!-- End Why Us Section -->
 
 
-  <!-- ======= Team Section ======= -->
-  <section id="team" class="team section-bg">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Event</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Get interesting experiences with the latest events that will soon be held on campus. Join and take part in
+            these exciting events to broaden your horizons, improve your skills and forge valuable relationships. Do not
+            miss this opportunity!</p>
         </div>
 
         <div class="row">
 
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/portfolio/panti2.jpeg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Panti Asuhan</h4>
-                <span>Chief Executive Officer</span>
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+          <?php foreach ($penjadwalan as $dashboard): ?>
+            <div class="col-lg-6 casing-event" data-aos="zoom-in" data-aos-delay="100">
+              <div class="member d-flex align-items-start">
+                <div class="pic"><img src="<?= base_url('uploads/' . $dashboard['gambar']) ?>" class="img-fluid" alt="">
                 </div>
-              </div>
-            </div>
-          </div>
+                <div class="member-info">
+                  <h4>
+                    <?= $dashboard['Nama_Event']; ?>
+                  </h4>
+                  <h6>Tanggal :
+                    <?= $dashboard['Tanggal']; ?>
+                  </h6>
+                  <h6>Jam :
+                    <?= $dashboard['Jam']; ?>
+                  </h6>
+                  <h6>Tempat :
+                    <?= $dashboard['Tempat']; ?>
+                  </h6>
+                  <div class="social">
+                  <span class="more-user" onclick="window.location.href='<?= $dashboard['Link_Daftar']; ?>'">Daftar</span>
 
-          <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/team/gemastik.jpeg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Gemastik</h4>
-                <span>Gemastik</span>
-                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/portfolio/panti2.jpeg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>WORKSHOP</h4>
-                <span>CTO</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/team/team-4.jpg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endforeach; ?>
 
         </div>
 
       </div>
     </section><!-- End Team Section -->
 
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="row">
-          <div class="col-lg-9 text-center text-lg-start">
-            <h3>Call To Action</h3>
-            <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">Call To Action</a>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
@@ -362,110 +343,37 @@
 
         <div class="section-title">
           <h2>Dokumentasi</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Documentation is an important part of campus events. Through documentation, we record precious moments,
+            share experiences, and promote activities to others. Documentation is also evaluation material and
+            inspiration for the next event.</p>
         </div>
 
         <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
           <li data-filter="*" class="filter-active">All</li>
-          <li data-filter=".filter-app">Expo</li>
+          <!-- <li data-filter=".filter-app">Expo</li>
           <li data-filter=".filter-card">UKMI</li>
-          <li data-filter=".filter-web">Gemastik</li>
+          <li data-filter=".filter-web">Gemastik</li> -->
         </ul>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-img"><img src="assets/img/portfolio/ukmi.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Ukmi Berbagi Takjil</h4>
-              <p>Kegiatan rutin UUKMI dibulan Ramadan</p>
-              <a href="assets/img/portfolio/ukmi.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" ><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
+          <?php foreach ($laporan as $item): ?>
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="pic"><img src="<?= base_url('uploads/' . $item['gambar']) ?>" class="img-fluid" alt="">
+              </div>
+              <div class="portfolio-info">
+                <h4>
+                  <?= $item['Judul']; ?>
+                </h4>
+                <p>
+                  <?= $item['Keterangan']; ?>
+                </p>
+                <a href="<?= $item['gambar']; ?>" data-gallery="portfolioGallery"
+                  class="portfolio-lightbox preview-link"></a>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-img"><img src="assets/img/portfolio/gemastik.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Gemastik 2022</h4>
-              <p>Acara Gemastik adalah acara</p>
-              <p>Rutin Setiap Tahun</p>
-              <a href="assets/img/portfolio/gemastik.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-img"><img src="assets/img/portfolio/bem.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>BEM Berbagi Takjil</h4>
-              <p>Acara rutin BEM Di</p>
-              <p>Bulan Ramadan</p>
-              <a href="assets/img/portfolio/bem.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" ><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-img"><img src="assets/img/portfolio/panti-asuhan.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Santunan Kepada Anak Panti</h4>
-              <p>Acara rutin yang di lakukan</p>
-              <p>Kemahasiswaan Teknokrat</p>
-              <a href="assets/img/portfolio/panti-asuhan.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-img"><img src="assets/img/portfolio/ukmi2.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
-              <a href="assets/img/portfolio/ukmi2.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" ><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-img"><img src="assets/img/portfolio/Halalbihalal.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>App 3</h4>
-              <p>App</p>
-              <a href="assets/img/portfolio/Halalbihalal.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-img"><img src="assets/img/portfolio/ukmkristen.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Card 1</h4>
-              <p>Card</p>
-              <a href="assets/img/portfolio/ukmkristen.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-img"><img src="assets/img/portfolio/WORKSHOP.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Card 3</h4>
-              <p>Card</p>
-              <a href="assets/img/portfolio/WORKSHOP.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-img"><img src="assets/img/portfolio/workshoprobot.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <a href="assets/img/portfolio/workshoprobot.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
+          <?php endforeach; ?>
 
         </div>
 
@@ -477,55 +385,56 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <div class="section-title">
+            <h2>Mitra</h2>
+            <p>Partners are an important element in campus events. Partners can be institutions, companies, or
+              individuals who collaborate with campuses to organize events. With partners, campus events can get support
+              in terms of resources, funds, facilities and networks. Collaboration with partners can also provide
+              additional benefits for event participants, such as internship opportunities, skills enhancement, and
+              access to career opportunities..</p>
+          </div>
+
+          <div class="row">
+
+            <?php foreach ($datamitra as $data): ?>
+              <div class="col-xl-3 col-md-6 d-flex align-items-stretch wadah-mitra" data-aos="zoom-in"
+                data-aos-delay="100">
+                <div class="icon-box">
+                  <div class="pic"><img src="<?= base_url('uploads/' . $data['Dokumen_Terkait']) ?>" class="img-fluid"
+                      alt="">
+                  </div>
+                  <h4 class="judul-mitra">
+                    <?= $data['Nama_Mitra']; ?>
+                  </h4><br>
+                  <p>Kontak:
+                    <?= $data['Kontak']; ?>
+                  </p>
+                  <p>Kategori Mitra:
+                    <?= $data['Kategori_Mitra']; ?>
+                  </p>
+                  <p>Deskripsi:
+                    <?= $data['Deskripsi']; ?>
+                  </p>
+                </div>
+              </div>
+            <?php endforeach; ?>
+
+          </div>
+
+
+
         </div>
-
-        <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->  
+    </section><!-- End Services Section -->
 
     <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    <!-- <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Pricing</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+            consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
+            in iste officiis commodi quidem hic quas.</p>
         </div>
 
         <div class="row">
@@ -578,7 +487,7 @@
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
+    </section> End Pricing Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
@@ -586,52 +495,77 @@
 
         <div class="section-title">
           <h2>Frequently Asked Questions</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>In the context of campus events, there are often several general questions that are often asked by
+            participants or potential participants. Here are some frequently asked questions and their answers:.</p>
         </div>
 
         <div class="faq-list">
           <ul>
             <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
+                data-bs-target="#faq-list-1">What is a campus event? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                 <p>
-                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  Campus events are activities or events held on campus or by students and campus institutions for
+                  specific purposes. Campus events can include various types of activities, such as seminars,
+                  conferences, workshops, art performances, cultural festivals, sports competitions, exhibitions, and
+                  many more..
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2"
+                class="collapsed">Are campus events open to the public? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  Policies regarding who can attend campus events can vary depending on the event. Some campus events
+                  may be open to the public, while others may only be intended for certain students or campus members.
+                  Check the event information to see if the event is open to the public or limited.
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="300">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3"
+                class="collapsed">What benefits can I get from participating in campus events? <i
+                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  Participating in campus events can provide various benefits. You can increase your experience and
+                  skills, broaden your social and professional networks, gain a better understanding of a particular
+                  topic or field, and have the opportunity to interact with experts or practitioners in that field. In
+                  addition, campus events can also be a place to explore your interests and talents and broaden your
+                  horizons.
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4"
+                class="collapsed">Are campus events open to the public? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+                  Policies regarding who can attend campus events can vary depending on the event. Some campus events
+                  may be open to the public, while others may only be intended for certain students or campus members.
+                  Check the event information to see if the event is open to the public or limited.
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="500">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5"
+                class="collapsed">Is there a fee that I have to pay to attend campus events? <i
+                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                  Fee policies for participating in campus events may vary. Some campus events may be free, while others
+                  may require payment of an entry fee or ticket. Information about costs is usually included in the
+                  announcement or event registration information. Be sure to pay attention to this information so you
+                  know if there is a fee to be paid.
                 </p>
               </div>
             </li>
@@ -648,7 +582,7 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <img src="assets/images/logo.png" alt="" width="100" height="100">
         </div>
 
         <div class="row">
@@ -657,23 +591,25 @@
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <h4>Universitas Teknokrat Indonesia:</h4>
+                <p>JL.ZA.Pagar Alam No.9-11, Labuhan Ratu,Lampung 35132</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com</p>
+                <p>uti@teknokrat.ac.id</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <p>(0721) 702022</p>
               </div>
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.226620181534!2d105.2578159!3d-5.382383999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40dadc7970b277%3A0x5b1fe57f83b6416c!2sUniversitas%20Teknokrat%20Indonesia!5e0!3m2!1sid!2sid!4v1685283635997!5m2!1sid!2sid"
+                frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
             </div>
 
           </div>
@@ -717,54 +653,34 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="footer-top">
       <div class="container">
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Arsha</h3>
+            <h3>Universitas Teknokrat Indonesia</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              JL.ZA.Pagar Alam No.9-11,<br>
+              Labuhan Ratu,<br>
+              Lampung 35132 <br><br>
+              <strong>Phone:</strong>(0721) 702022<br>
+              <strong>Email:</strong> uti@teknokrat.ac.id<br>
             </p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
+           
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
+          <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#portfolio">Dokumentasi</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#services">Mitra</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contact</a></li>
             </ul>
           </div>
 
@@ -786,20 +702,21 @@
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Tri Ferli Handoyo</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
       </div>
     </div>
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
@@ -812,6 +729,8 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/laporan.js"></script>
+
 
 </body>
 
